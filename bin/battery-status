@@ -6,7 +6,7 @@
 # display in your prompt.
 
 if test ! "$(uname)" = "Darwin"
-  then
+then
   printf ""
   exit 0
 fi
