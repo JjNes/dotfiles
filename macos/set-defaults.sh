@@ -14,7 +14,7 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 
 # Always open everything in Finder's list view. This is important.
-defaults write com.apple.Finder FXPreferredViewStyle Nlsv
+defaults write com.apple.finder "FXPreferredViewStyle" -string "Nlsv"
 
 # Show the ~/Library folder.
 chflags nohidden ~/Library
@@ -28,5 +28,5 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Set Fn sate
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
-# Включить Caps Lock для переключения раскладки
+# Enable Caps Lock for Switching Layout
 defaults write -g TISRomanSwitchState -int 1
