@@ -11,6 +11,11 @@ then
   echo "› brew bundle"
   brew bundle
 fi
+if test $(which apt)
+then
+  echo "› apt bundle"
+  apt-bundle $ZSH/Debfile
+fi
 
 
 # find the installers and run them iteratively

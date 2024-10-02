@@ -1,0 +1,27 @@
+package build-essential
+package libreadline-dev
+package postgresql-client
+package vim
+
+package git
+
+package grc
+package coreutils
+
+#vscodium
+keyring vscodium-archive-keyring https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+source vscodium <<EOF
+deb [arch=amd64 signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg] https://download.vscodium.com/debs vscodium main
+EOF
+package codium
+
+#docker 
+keyring docker https://download.docker.com/linux/ubuntu/gpg
+source docker <<EOF
+deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu noble stable
+EOF
+package docker-ce 
+package docker-ce-cli 
+package containerd.io 
+package docker-buildx-plugin 
+package docker-compose-plugin
