@@ -59,6 +59,9 @@ then
 
   echo "› brew upgrade"
   brew upgrade
+
+  echo "› brew cleanup"
+  brew cleanup
 fi
 
 # Install software
