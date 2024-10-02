@@ -10,3 +10,4 @@ brew 'hashicorp/tap/terraform'
 
 cask 'vscodium'
 cask 'orbstack'
+cask 'knockknock'
