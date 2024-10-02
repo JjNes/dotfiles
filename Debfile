@@ -8,6 +8,9 @@ package git
 package grc
 package coreutils
 
+#ppa ppa:ansible/ansible
+#package ansible
+
 #vscodium
 keyring vscodium-archive-keyring https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
 source vscodium <<EOF
@@ -25,3 +28,10 @@ package docker-ce-cli
 package containerd.io 
 package docker-buildx-plugin 
 package docker-compose-plugin
+
+#ansible 
+keyring ansible-archive-keyring "https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=get&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367"
+source ansible <<EOF
+deb [signed-by=/usr/share/keyrings/ansible-archive-keyring.gpg] http://ppa.launchpad.net/ansible/ansible/ubuntu noble main
+EOF
+package ansible
