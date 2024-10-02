@@ -1,6 +1,3 @@
-package build-essential
-package libreadline-dev
-package postgresql-client
 package vim
 
 package git
