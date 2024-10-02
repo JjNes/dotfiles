@@ -14,7 +14,7 @@ fi
 if test $(which apt)
 then
   echo "› apt bundle"
-  apt-bundle $ZSH/Debfile
+  apt-bundle Debfile
 fi
 
 
