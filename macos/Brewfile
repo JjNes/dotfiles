@@ -8,6 +8,9 @@ brew 'coreutils'
 brew 'grc'
 brew 'hashicorp/tap/terraform'
 
+brew 'zsh-syntax-highlighting'
+brew 'zsh-autosuggestions'
+
 cask 'vscodium'
 cask 'orbstack'
 cask 'knockknock'

@@ -1,7 +1,10 @@
-## Debug ##
-START_TIME=$SECONDS
-###########
 export ZSH=$HOME/.dotfiles
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  plarform="macos"
+else
+  plarform="shared"
+fi
 
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
@@ -13,7 +16,7 @@ fi
 
 # all of our zsh files
 typeset -U config_files
-config_files=($ZSH/**/*.zsh)
+config_files=($ZSH/{shared,${plarform}}/**/*.zsh)
 
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}
@@ -47,15 +50,3 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
-
-## Debug ##
-function precmd() {
-    ELAPSED_TIME=$(( SECONDS - START_TIME ))
-    echo "Shell startup time: ${ELAPSED_TIME} seconds"
-}
-
-# Сброс времени для следующего запуска
-function preexec() {
-    START_TIME=$SECONDS
-}
-###########
