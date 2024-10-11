@@ -21,6 +21,32 @@ setup_gitconfig () {
 
     sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" shared/git/gitconfig.local.symlink.example > shared/git/gitconfig.local.symlink
   fi
+
+  while true; do
+    echo 'Добавить профиль для другой компании? (y/n)'
+    read -e add_profile
+    if [[ $add_profile != "y" ]]; then
+      break
+    fi
+
+    echo 'Укажите директорию для includeIf (например, ~/develop/company_name/**):'
+    read -e gitdir
+
+    echo 'Укажите имя автора для этой компании:'
+    read -e company_authorname
+    echo 'Укажите email для этой компании:'
+    read -e company_authoremail
+
+    # Добавляем конфигурацию для конкретной директории
+    cat <<EOT >> shared/git/gitconfig.local.symlink
+
+[includeIf "gitdir:$gitdir"]
+[user]
+    name = $company_authorname
+    email = $company_authoremail
+EOT
+
+    done
 }
 
 link_file () {
