@@ -16,6 +16,7 @@ setup_gitconfig () {
 
     echo 'What is your github author name?'
     read -e git_authorname
+    echo 'What is your github author email?'
     read -e git_authoremail
 
     sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" shared/git/gitconfig.local.symlink.example > shared/git/gitconfig.local.symlink
@@ -35,7 +36,7 @@ link_file () {
 install_dotfiles () {
   local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find -H $1 -maxdepth 2 -name '*.symlink' -not -path '*.git*')
+  for src in $(find -H $1 -maxdepth 2 -name '*.symlink')
   do
     dst="$HOME/.$(basename "${src%.*}")"
     link_file "$src" "$dst"
@@ -45,14 +46,16 @@ install_dotfiles () {
 setup_gitconfig
 install_dotfiles $DOTFILES_ROOT/shared
 
+find $DOTFILES_ROOT/shared -name install.sh | while read installer ; do sh -c "${installer}" ; done
+
 if [[ "$(uname)" == "Darwin" ]]; then
   echo 'macos'
   install_dotfiles $DOTFILES_ROOT/macos
-elif [[ -f "/etc/linuxmint/info" ]]; then
-  echo 'mint' 
-  install_dotfiles $DOTFILES_ROOT/mint
-elif [[ -f "/etc/arch-release" ]]; then
-  echo 'arch'
+  find $DOTFILES_ROOT/macos -name install.sh | while read installer ; do sh -c "${installer}" ; done
+elif [[ "$(uname)" == "Linux" ]]; then
+  echo 'linux' 
+  install_dotfiles $DOTFILES_ROOT/linux
+  find $DOTFILES_ROOT/linux -name install.sh | while read installer ; do sh -c "${installer}" ; done
 else
   echo 'unknown system'
 fi

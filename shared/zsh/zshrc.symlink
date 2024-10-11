@@ -2,6 +2,8 @@ export ZSH=$HOME/.dotfiles
 
 if [[ "$(uname)" == "Darwin" ]]; then
   plarform="macos"
+elif [[ "$(uname)" == "Linux" ]]; then
+  plarform="linux"
 else
   plarform="shared"
 fi

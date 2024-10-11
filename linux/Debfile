@@ -5,6 +5,9 @@ package git
 package grc
 package coreutils
 
+package zsh-autosuggestions
+package zsh-syntax-highlighting 
+
 #ppa ppa:ansible/ansible
 #package ansible
 

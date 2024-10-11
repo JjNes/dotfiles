@@ -2,8 +2,9 @@
 
 set -e
 
-./set-defaults.sh
+cd "$(dirname "$0")/.."
+DOTFILES_ROOT=$(pwd -P)
 
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+$DOTFILES_ROOT/macos/set-defaults.sh
 
-brew bundle --file ./Brewfile
+brew bundle --file $DOTFILES_ROOT/macos/Brewfile
