@@ -20,7 +20,7 @@ setup_gitconfig () {
     read -e git_authoremail
 
     sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" shared/git/gitconfig.local.symlink.example > shared/git/gitconfig.local.symlink
-  fi
+  
 
   while true; do
     echo 'Добавить профиль для другой компании? (y/n)'
@@ -47,6 +47,7 @@ setup_gitconfig () {
 EOT
 
     done
+  fi
 }
 
 link_file () {
