@@ -10,6 +10,7 @@ brew 'hashicorp/tap/terraform'
 brew 'starship'
 brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
+brew 'direnv'
 
 cask 'knockknock'
 cask 'mos'
