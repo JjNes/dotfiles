@@ -1,47 +1,66 @@
-# dotfiles
+# Dotfiles by JjNes
 
-Your dotfiles are how you personalize your system. These are mine.
+Этот репозиторий содержит мои персональные настройки окружения (dotfiles) для macOS.
 
-## components
+## Состав
+- Конфиги для git, zsh, starship и других инструментов
+- Brewfile для автоматической установки CLI и GUI приложений
+- Скрипты для настройки macOS
+- Makefile для удобного управления установкой и генерацией локальных конфигов
 
-There's a few special files in the hierarchy.
+## Быстрый старт
 
-- **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
-  available everywhere.
-- **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your
-  environment.
-- **topic/path.zsh**: Any file named `path.zsh` is loaded first and is
-  expected to setup `$PATH` or similar.
-- **topic/completion.zsh**: Any file named `completion.zsh` is loaded
-  last and is expected to setup autocomplete.
-- **topic/install.sh**: Any file named `install.sh` is executed when you run `script/install`. To avoid being loaded automatically, its extension is `.sh`, not `.zsh`.
-- **topic/\*.symlink**: Any file ending in `*.symlink` gets symlinked into
-  your `$HOME`. This is so you can keep all of those versioned in your dotfiles
-  but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `script/bootstrap`.
+1. **Клонируйте репозиторий:**
+   ```sh
+   git clone --recursive https://github.com/jjnes/dotfiles.git ~/.dotfiles
+   cd ~/.dotfiles
+   ```
 
-## install
+2. **Установите dotfiles и все зависимости:**
+   ```sh
+   make setup
+   ```
+   Это выполнит установку Homebrew, всех пакетов из Brewfile, создаст симлинки и применит базовые настройки.
 
-Run this:
+3. **Примените системные настройки macOS:**
+   ```sh
+   make macos-config
+   ```
+   (или вручную: `sudo bash ./macos/defaults.sh`)
 
-```sh
-git clone https://github.com/JjNes/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-script/bootstrap
-```
+4. **Сгенерируйте локальный git-конфиг:**
+   ```sh
+   make gitconfig-local
+   ```
+   Если файл уже существует, для перезаписи используйте:
+   ```sh
+   make gitconfig-local FORCE=1
+   ```
 
-This will symlink the appropriate files in `.dotfiles` to your home directory.
-Everything is configured and tweaked within `~/.dotfiles`.
+5. **Обновите dotfiles и повторно примените настройки:**
+   ```sh
+   make update
+   ```
 
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
-which sets up a few paths that'll be different on your particular machine.
+## Основные цели Makefile
 
-`dot` is a simple script that installs some dependencies, sets sane macOS
-defaults, and so on. Tweak this script, and occasionally run `dot` from
-time to time to keep your environment fresh and up-to-date. You can find
-this script in `bin/`.
+- `make setup` — полная установка dotfiles и зависимостей
+- `make macos-config` — применить системные настройки macOS (требует sudo)
+- `make gitconfig-local` — создать локальный git-конфиг интерактивно
+- `make update` — обновить репозиторий и повторно применить все настройки
 
-## thanks
+## Структура
 
-I forked [Zach Holman](https://github.com/holman)' excellent
-[dotfiles](https://github.com/holman/dotfiles)
+- `install.conf.yaml` — основной конфиг Dotbot
+- `Brewfile` — список пакетов для Homebrew
+- `config/` — все пользовательские конфиги (zsh, git, starship и др.)
+- `scripts/` — вспомогательные скрипты (например, генерация gitconfig.local)
+- `macos/` — скрипты для настройки системы
+
+## Требования
+- macOS
+- [Homebrew](https://brew.sh/) (установится автоматически при setup)
+- git
+
+## Лицензия
+MIT

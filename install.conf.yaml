@@ -1,0 +1,39 @@
+---
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- shell:
+    - description: Installing Homebrew
+      command: |
+        if test ! $(which brew)
+        then
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+    
+
+- shell:
+    - [brew bundle --file Brewfile --no-upgrade, Installing packages]
+
+
+- clean: ['~']
+
+- link:
+    # SSH:
+    ~/.ssh/config: config/ssh_config
+
+    # Git:
+    ~/.gitconfig: config/gitconfig
+    ~/.gitignore_global: config/gitignore
+    ~/.gitattributes_global: config/gitattributes
+
+    # Zsh:
+    ~/.zshrc: config/zshrc
+    ~/.zsh: zsh
+
+    # Starship:
+    ~/.config/starship.toml: config/starship.toml
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

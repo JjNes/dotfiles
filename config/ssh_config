@@ -1,0 +1,11 @@
+# Added by OrbStack: 'orb' SSH host for Linux machines
+# This only works if it's at the top of ssh_config (before any Host blocks).
+# Comment this line if you don't want it to be added again.
+Include ~/.orbstack/ssh/config
+
+Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    UseKeychain yes
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/id_rsa

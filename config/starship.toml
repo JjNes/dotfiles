@@ -1,0 +1,55 @@
+format = """
+$directory$git_branch$git_status$kubernetes$aws$terraform$golang$nodejs$python$cmd_duration$line_break$character
+"""
+
+[directory]
+truncation_length = 3
+style = "bold cyan"
+
+[git_branch]
+symbol = "🌱 "
+style = "bold purple"
+
+[git_status]
+style = "red"
+
+[character]
+success_symbol = "[➜](green bold)"
+error_symbol = "[✗](bold red)"
+
+[cmd_duration]
+min_time = 500  # Показывать, если > 500мс
+format = "⏱️ [$duration](yellow) "
+
+# GO
+[golang]
+symbol = "🦫 "
+style = "bold blue"
+
+# Python
+[python]
+symbol = "🐍 "
+style = "green"
+pyenv_version_name = true
+
+# Node.js
+[nodejs]
+symbol = "⬢ "
+style = "bold green"
+
+# Kubernetes
+[kubernetes]
+symbol = "⎈ "
+format = '[$symbol$context( \($namespace\))]($style) '
+style = "dim blue"
+
+# AWS
+[aws]
+symbol = "🅰️ "
+format = '[$symbol$profile]($style) '
+style = "bold yellow"
+
+# Terraform
+[terraform]
+format = "[ $workspace]($style) "
+style = "bold 105"

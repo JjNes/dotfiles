@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+for file in ~/.zsh/*.zsh; do
+  source "$file"
+done
+
+# === Starship Prompt ===
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+# === Direnv ===
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
